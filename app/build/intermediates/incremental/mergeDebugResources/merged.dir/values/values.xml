@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ik_blue_gray">#FF696277</color>
+    <color name="ik_blue_white">#FFBDE5F2</color>
+    <color name="ik_dark_black">#FF141100</color>
+    <color name="ik_dark_gray">#FB3C3F41</color>
+    <color name="ik_full_transparent">#00000000</color>
+    <color name="ik_orange">#FFEA8010</color>
+    <color name="ik_purple">#FF662E91</color>
+    <color name="ik_transparent">#80000000</color>
+    <declare-styleable name="RoundProgressBar">
+        <attr format="color" name="roundColor"/>
+        <attr format="color" name="roundProgressColor"/>
+        <attr format="dimension" name="roundWidth"/>
+        <attr format="color" name="textColor"/>
+        <attr format="dimension" name="textSize"/>
+        <attr format="integer" name="max"/>
+        <attr format="boolean" name="textIsDisplayable"/>
+        <attr name="style">
+            <enum name="STROKE" value="0"/>
+            <enum name="FILL" value="1"/>
+        </attr>
+    </declare-styleable>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <string name="app_name">IrisKingA</string>
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_identification_failed">identification failure</string>
+    <string name="dialog_identification_success">identification success</string>
+    <string name="dialog_no_feature">please register</string>
+    <string name="dialog_overmuch_feature">overload templates</string>
+    <string name="dialog_registration_failed">registration failure</string>
+    <string name="dialog_timeout">Time out, please try again</string>
+    <string name="dialog_title_notice">Notice</string>
+    <string name="dialog_usb_connected">USB connected</string>
+    <string name="dialog_usb_disconnected">USB disconnected</string>
+    <string name="start_capture">Start Capture</string>
+    <string name="start_identify">Start Identification</string>
+    <string name="start_register">Start Registration</string>
+    <string name="stop_capture">Stop Capture</string>
+    <string name="stop_identify">Stop Identification</string>
+    <string name="stop_register">Stop Registration</string>
+    <string name="tip_bad_image">keep your eyes in screen frame</string>
+    <string name="tip_blink_eyes">please blink</string>
+    <string name="tip_do_not_attack">unauthorized device</string>
+    <string name="tip_inputusername">please enter user name</string>
+    <string name="tip_invaliddate">invalid data</string>
+    <string name="tip_invaliddevice">unauthorized device</string>
+    <string name="tip_keep_stable">keep device stable</string>
+    <string name="tip_lower_head">please lower your head</string>
+    <string name="tip_move_closer">please move closer</string>
+    <string name="tip_move_closer_dist">please move %02dcm closer</string>
+    <string name="tip_move_father">please move farther</string>
+    <string name="tip_move_father_dist">please move %02dcm farther</string>
+    <string name="tip_noeyedetected">no eye detected</string>
+    <string name="tip_open_eye">keep your eyes open</string>
+    <string name="tip_raise_head">please upper your head</string>
+    <string name="tip_remove_contact_lenses">please remove contact lenses</string>
+    <string name="tip_remove_glasses">please remove glasses</string>
+    <string name="tip_scanning">scanning...</string>
+    <string name="tip_unauthorized_attack">unauthorized attack</string>
+    <string name="tip_use_indoors">please use device indoors</string>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>

@@ -1,0 +1,59 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .idea\
+* .idea\IKPreviewSampleDemoCPP.iml
+* .idea\modules.xml
+* .idea\workspace.xml
+* proguard-project.txt
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app\src\main\AndroidManifest.xml
+* assets\ => app\src\main\assets
+* libs\arm64-v8a\libEncrypt.so => app\src\main\jniLibs\arm64-v8a\libEncrypt.so
+* libs\arm64-v8a\libImage.so => app\src\main\jniLibs\arm64-v8a\libImage.so
+* libs\arm64-v8a\libIrisking.so => app\src\main\jniLibs\arm64-v8a\libIrisking.so
+* libs\arm64-v8a\librawusb100.so => app\src\main\jniLibs\arm64-v8a\librawusb100.so
+* libs\arm64-v8a\librawuvc.so => app\src\main\jniLibs\arm64-v8a\librawuvc.so
+* libs\arm64-v8a\librawUVCCamera.so => app\src\main\jniLibs\arm64-v8a\librawUVCCamera.so
+* libs\arm64-v8a\libusb100.so => app\src\main\jniLibs\arm64-v8a\libusb100.so
+* libs\arm64-v8a\libuvc.so => app\src\main\jniLibs\arm64-v8a\libuvc.so
+* libs\arm64-v8a\libUVCCamera.so => app\src\main\jniLibs\arm64-v8a\libUVCCamera.so
+* libs\armeabi-v7a\libEncrypt.so => app\src\main\jniLibs\armeabi-v7a\libEncrypt.so
+* libs\armeabi-v7a\libImage.so => app\src\main\jniLibs\armeabi-v7a\libImage.so
+* libs\armeabi-v7a\libIrisking.so => app\src\main\jniLibs\armeabi-v7a\libIrisking.so
+* libs\armeabi-v7a\librawusb100.so => app\src\main\jniLibs\armeabi-v7a\librawusb100.so
+* libs\armeabi-v7a\librawuvc.so => app\src\main\jniLibs\armeabi-v7a\librawuvc.so
+* libs\armeabi-v7a\librawUVCCamera.so => app\src\main\jniLibs\armeabi-v7a\librawUVCCamera.so
+* libs\armeabi-v7a\libusb100.so => app\src\main\jniLibs\armeabi-v7a\libusb100.so
+* libs\armeabi-v7a\libuvc.so => app\src\main\jniLibs\armeabi-v7a\libuvc.so
+* libs\armeabi-v7a\libUVCCamera.so => app\src\main\jniLibs\armeabi-v7a\libUVCCamera.so
+* libs\IrisAlgo.jar => app\libs\IrisAlgo.jar
+* libs\jpeg.jar => app\libs\jpeg.jar
+* res\ => app\src\main\res\
+* src\ => app\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 圆角按钮定义 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle" >
+            <!-- android:drawable="@android:color/transparent" -->
+            <!-- stroke:线框 width 线框宽度 -->
+            <stroke
+                android:width="2dp"
+                android:color="@color/ik_blue_gray" >
+            </stroke>
+
+            <!-- 按钮内部透明 -->
+            <solid android:color="#10000000" />
+
+            <!--  在按钮内部，字的前后左右与边框之间的距离 -->
+            <padding
+                android:bottom="12dp"
+                android:top="12dp"
+                android:left="100dp"
+                android:right="100dp" />
+
+            <!-- 按钮上下左右圆角的度数 -->
+            <corners
+                android:bottomLeftRadius="30dp"
+                android:bottomRightRadius="30dp"
+                android:topLeftRadius="30dp"
+                android:topRightRadius="30dp" />
+
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle" >
+            <!-- stroke:线框 -->
+            <!-- android:drawable="@android:color/transparent" -->
+            <stroke
+                android:width="2dp"
+                android:color="@color/ik_dark_black" >
+            </stroke>
+
+            <!-- 按钮按下后微黑，不是全透明 -->
+            <solid android:color="@color/ik_transparent" />
+
+            <!--  在按钮内部，字的前后左右与边框之间的距离 -->
+            <padding
+                android:bottom="12dp"
+                android:top="12dp"
+                android:left="100dp"
+                android:right="100dp" />
+
+            <!-- 按钮上下左右圆角的度数 -->
+            <corners
+                android:bottomLeftRadius="30dp"
+                android:bottomRightRadius="30dp"
+                android:topLeftRadius="30dp"
+                android:topRightRadius="30dp" />
+        </shape>
+    </item>
+</selector>
+

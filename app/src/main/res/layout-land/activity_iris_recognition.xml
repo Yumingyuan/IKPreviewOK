@@ -1,0 +1,150 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg1" >
+
+    <FrameLayout
+        android:id="@+id/frame_big"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <SurfaceView
+            android:id="@+id/iv_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <com.irisking.scanner.RoundProgressBar
+            android:id="@+id/roundProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            android_custom:roundColor="@android:color/white"
+            android_custom:roundProgressColor="#00FF00"
+            android_custom:roundWidth="6dip"
+            android_custom:textIsDisplayable="false" />
+
+        <com.irisking.scanner.EyeView
+            android:id="@+id/eye"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/ie_final_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="#FF0000"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/iv_left"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:id="@+id/iv_right"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="50dp" />
+
+    <RadioGroup
+        android:id="@+id/rg_eyeGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/iv_left"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical" >
+
+        <RadioButton
+            android:id="@+id/rb_bothEye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:checked="true"
+            android:text="Both Eye" />
+
+        <RadioButton
+            android:id="@+id/rb_leftEye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Left Eye" />
+
+        <RadioButton
+            android:id="@+id/rb_rightEye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Right Eye" />
+
+        <RadioButton
+            android:id="@+id/rb_undef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="undef" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/ll_config"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/et_userName"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:maxLength="18"
+            android:singleLine="true"
+            android:text="default" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_white_round"
+            android:drawableLeft="@drawable/iconfont_my_33_width"
+            android:text="@string/start_register"
+            android:textColor="@color/ik_dark_black" />
+
+        <Button
+            android:id="@+id/btn_capture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_white_round"
+            android:drawableLeft="@drawable/iconfont_my_33_width"
+            android:text="@string/start_capture"
+            android:visibility="gone"
+            android:textColor="@color/ik_dark_black" />
+
+        <Button
+            android:id="@+id/btn_scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_white_round"
+            android:drawableLeft="@drawable/iconfont_roundcheck_33_width"
+            android:text="@string/start_identify"
+            android:textColor="@color/ik_dark_black" />
+    </LinearLayout>
+
+</RelativeLayout>

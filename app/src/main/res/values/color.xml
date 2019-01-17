@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ik_transparent">#80000000</color>
+
+    <!-- <color name="ik_blue_white">#FFE7F9FF</color> -->
+    <color name="ik_full_transparent">#00000000</color>
+    <color name="ik_blue_white">#FFBDE5F2</color>
+    <color name="ik_purple">#FF662E91</color>
+    <color name="ik_orange">#FFEA8010</color>
+    <color name="ik_blue_gray">#FF696277</color>
+    <color name="ik_dark_black">#FF141100</color>
+    <color name="ik_dark_gray">#FB3C3F41</color>
+</resources>
