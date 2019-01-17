@@ -5,6 +5,7 @@
     
     <string name="start_register">开始注册</string>
     <string name="start_capture">开始采集</string>
+    <string name="start_pinidentify">PIN码认证</string>
     <string name="start_identify">开始识别</string>
     <string name="stop_register">停止注册</string>
     <string name="stop_capture">停止采集</string>

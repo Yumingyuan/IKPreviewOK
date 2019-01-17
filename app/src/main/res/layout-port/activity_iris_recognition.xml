@@ -106,7 +106,6 @@
                 android:layout_height="120dp" />
         </LinearLayout>
 
-
         <EditText
             android:id="@+id/et_userName"
             android:layout_width="120dp"
@@ -125,37 +124,82 @@
             android:ems="10"
             android:hint="请输入密码"
             android:inputType="numberPassword" />
-        <!---余北缘于2019年1月17日添加结束，用于PIN认证-->
-        <Button
-            android:id="@+id/btn_register"
+        <!---余北缘于2019年1月17日添加Edittext，用于PIN认证-->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/button_white_round"
-            android:drawableLeft="@drawable/iconfont_my_33_width"
-            android:text="@string/start_register"
-            android:textColor="@color/ik_dark_black" />
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="240px"
+                android:layout_height="70px"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/button_white_round"
+                android:text="@string/start_register"
+                android:textColor="@color/ik_dark_black" />
+                <!--android:drawableLeft="@drawable/iconfont_my_33_width"-->
+            <!--不显示Button-->
+            <Button
+                android:id="@+id/btn_capture"
+                android:visibility="gone"
+                android:layout_width="200px"
+                android:layout_height="70px"
+                android:layout_marginBottom="200px"
+                android:background="@drawable/button_white_round"
+                android:drawableLeft="@drawable/iconfont_my_33_width"
+                android:text="@string/start_capture"
+                android:textColor="@color/ik_dark_black" />
+            <!--不显示Button-->
+            <Button
+                android:id="@+id/btn_scan"
+                android:layout_width="240px"
+                android:layout_height="70px"
+                android:layout_toRightOf="@id/btn_register"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/button_white_round"
+                android:text="@string/start_identify"
+                android:textColor="@color/ik_dark_black" />
+        <!--android:drawableLeft="@drawable/iconfont_roundcheck_33_width"-->
+    <Button
+        android:id="@+id/btn_pin"
+        android:layout_width="240px"
+        android:layout_height="70px"
+        android:layout_toRightOf="@id/btn_scan"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_white_round"
+        android:text="@string/start_pinidentify"
+        android:textColor="@color/ik_dark_black" />
+</RelativeLayout>
+<!--<Button
+    android:id="@+id/btn_register"
+    android:layout_width="300px"
+    android:layout_height="70px"
+    android:layout_marginBottom="30dp"
+    android:background="@drawable/button_white_round"
+    android:drawableLeft="@drawable/iconfont_my_33_width"
+    android:text="@string/start_register"
+    android:textColor="@color/ik_dark_black" />
 
-        <Button
-            android:id="@+id/btn_capture"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/button_white_round"
-            android:drawableLeft="@drawable/iconfont_my_33_width"
-            android:text="@string/start_capture"
-            android:textColor="@color/ik_dark_black" />
+<Button
+    android:id="@+id/btn_capture"
+    android:visibility="gone"
+    android:layout_width="300px"
+    android:layout_height="70px"
+    android:layout_marginBottom="30dp"
+    android:background="@drawable/button_white_round"
+    android:drawableLeft="@drawable/iconfont_my_33_width"
+    android:text="@string/start_capture"
+    android:textColor="@color/ik_dark_black" />
 
-        <Button
-            android:id="@+id/btn_scan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/button_white_round"
-            android:drawableLeft="@drawable/iconfont_roundcheck_33_width"
-            android:text="@string/start_identify"
-            android:textColor="@color/ik_dark_black" />
+<Button
+    android:id="@+id/btn_scan"
+    android:layout_width="300px"
+    android:layout_height="70px"
+    android:layout_marginBottom="30dp"
+    android:background="@drawable/button_white_round"
+    android:drawableLeft="@drawable/iconfont_roundcheck_33_width"
+    android:text="@string/start_identify"
+    android:textColor="@color/ik_dark_black" />-->
+
     </LinearLayout>
 
 </RelativeLayout>

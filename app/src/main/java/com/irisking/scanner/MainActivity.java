@@ -92,6 +92,9 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 	private Button mIrisRegisterBtn;
 	private Button mIrisCaptureBtn;
 	private Button mIrisIdenBtn;
+	//add by yumingyuan
+	private Button mPinIdenBtn;
+	//add by yumingyuan
 	private TextView mResultTextViewEnrRecFinal;
 	private EditText mUserNameEditText; // 显示用户名
 	private ImageView leftView; 
@@ -102,6 +105,9 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 	private RadioGroup mRgEye;
 	private RoundProgressBar progressBar;
 	private EyeView mEyeView; // 显示提示框的view界面
+	//add by yumingyuan
+	private EditText mPinedit;
+	//add by yumingyuan
 	//===================================
 	
 	//=========画IR图像=========
@@ -388,6 +394,12 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 		mIrisCaptureBtn = (Button) findViewById(R.id.btn_capture);
 		mIrisCaptureBtn.setOnClickListener(this);
 
+		//add by yumingyuan，初始化PIN认证按钮和密码输入框
+		mPinIdenBtn= (Button) findViewById(R.id.btn_pin);
+		mPinIdenBtn.setOnClickListener(this);
+		mPinedit= (EditText) findViewById(R.id.et_pinpass);
+		//add by yumingyuan
+
 		mResultTextViewEnrRecFinal = (TextView) findViewById(R.id.ie_final_result);
 		mUserNameEditText = (EditText) findViewById(R.id.et_userName);
 		leftView = (ImageView) findViewById(R.id.iv_left);
@@ -487,7 +499,14 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 				mIrisPresenter.startIdentify(mIdentifyConfig, processCallback);
 			}
 			break;
+		//add by yumingyuan
+		case R.id.btn_pin:
+			System.out.println("GET in"+mPinedit.getText());
+			break;
+			//add by yumingyuan
 		}
+
+
 	}
 	
 	@Override
