@@ -106,6 +106,7 @@
                 android:layout_height="120dp" />
         </LinearLayout>
 
+
         <EditText
             android:id="@+id/et_userName"
             android:layout_width="120dp"
@@ -116,7 +117,15 @@
             android:maxLength="18"
             android:singleLine="true"
             android:text="default" />
-
+        <!---余北缘于2019年1月17日添加开始，用于PIN认证-->
+        <EditText
+            android:id="@+id/et_pinpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="请输入密码"
+            android:inputType="numberPassword" />
+        <!---余北缘于2019年1月17日添加结束，用于PIN认证-->
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"

@@ -92,20 +92,21 @@ public final class R {
     public static final int btn_capture=0x7f050002;
     public static final int btn_register=0x7f050003;
     public static final int btn_scan=0x7f050004;
-    public static final int et_userName=0x7f050005;
-    public static final int eye=0x7f050006;
-    public static final int frame_big=0x7f050007;
-    public static final int ie_final_result=0x7f050008;
-    public static final int iv_camera=0x7f050009;
-    public static final int iv_left=0x7f05000a;
-    public static final int iv_right=0x7f05000b;
-    public static final int ll_config=0x7f05000c;
-    public static final int rb_bothEye=0x7f05000d;
-    public static final int rb_leftEye=0x7f05000e;
-    public static final int rb_rightEye=0x7f05000f;
-    public static final int rb_undef=0x7f050010;
-    public static final int rg_eyeGroup=0x7f050011;
-    public static final int roundProgress=0x7f050012;
+    public static final int et_pinpass=0x7f050005;
+    public static final int et_userName=0x7f050006;
+    public static final int eye=0x7f050007;
+    public static final int frame_big=0x7f050008;
+    public static final int ie_final_result=0x7f050009;
+    public static final int iv_camera=0x7f05000a;
+    public static final int iv_left=0x7f05000b;
+    public static final int iv_right=0x7f05000c;
+    public static final int ll_config=0x7f05000d;
+    public static final int rb_bothEye=0x7f05000e;
+    public static final int rb_leftEye=0x7f05000f;
+    public static final int rb_rightEye=0x7f050010;
+    public static final int rb_undef=0x7f050011;
+    public static final int rg_eyeGroup=0x7f050012;
+    public static final int roundProgress=0x7f050013;
   }
   public static final class layout {
     public static final int activity_iris_recognition=0x7f060000;
