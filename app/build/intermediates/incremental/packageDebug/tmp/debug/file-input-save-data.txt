@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Jan 17 18:17:00 CST 2019
+#Thu Jan 17 22:16:39 CST 2019
 17.baseType=DIRECTORY
 4.path=lib/arm64-v8a/libUVCCamera.so
 8.set=NATIVE_RESOURCE

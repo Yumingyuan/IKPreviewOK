@@ -1,10 +1,18 @@
 package com.irisking.scanner;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Properties;
 import java.util.UUID;
 
 import android.annotation.SuppressLint;
@@ -65,6 +73,8 @@ import com.irisking.scanner.presenter.IrisConfig;
 import com.irisking.scanner.presenter.IrisPresenter;
 import com.irisking.scanner.util.ImageUtil;
 import com.irisking.scanner.util.TimeArray;
+
+import org.apache.http.util.EncodingUtils;
 
 // 主文件，完成界面显示，UI控件控制等逻辑
 @SuppressWarnings("unused")
@@ -499,9 +509,46 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 				mIrisPresenter.startIdentify(mIdentifyConfig, processCallback);
 			}
 			break;
-		//add by yumingyuan
+		//add by yumingyuan认证用
 		case R.id.btn_pin:
-			System.out.println("GET in"+mPinedit.getText());
+			if(mPinedit.getText().length()==0)//edittext中未输入pin码的处理情况
+			{
+				Toast.makeText(this,"请输入PIN码以完成解锁",Toast.LENGTH_LONG).show();
+			}
+			else//输入PIN码，进行合法性检查
+			{
+			    String S_pin=mPinedit.getText().toString();
+				String passhash = null;
+                try {
+                    MessageDigest digest = MessageDigest.getInstance("SHA-1");
+                    byte[] result=digest.digest(S_pin.getBytes());
+                    String properties_file_path = "/data/data/userconfig.properties";
+					File file = new File(properties_file_path);
+					FileInputStream fin= new FileInputStream(file);
+					//FileInputStream fin = openFileInput(properties_file_path);
+					byte [] buffer = new byte[300];
+					InputStreamReader inputreader = new InputStreamReader(fin);
+					BufferedReader buffreader = new BufferedReader(inputreader);
+					String line;
+					//分行读取
+					while (( line = buffreader.readLine()) != null) {
+						if(line.contains("userpass"))
+						{
+							passhash=line.substring(line.indexOf("=")+2);
+						}
+					}
+                   if(convertHashToString(result).equals(passhash.trim()))
+					{
+						System.exit(0);
+					}
+					else
+					{
+						Toast.makeText(this,"PIN码错误",Toast.LENGTH_LONG).show();
+					}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 			break;
 			//add by yumingyuan
 		}
@@ -1157,5 +1204,17 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
             frameIndex = 0;
         }
     }
-	
+	//add by yumingyuan 20190117
+    private static String convertHashToString(byte[] hashBytes) {
+        String returnVal = "";
+        for (int i = 0; i < hashBytes.length; i++) {
+			//System.out.println(hashBytes[i]);
+			//System.out.println((hashBytes[i] & 0xff));
+        	//System.out.println((hashBytes[i] & 0xff) + 0x100);
+        	//System.out.println(Integer.toString(( hashBytes[i] & 0xff) + 0x100, 16));
+			//System.out.println(Integer.toString(( hashBytes[i] & 0xff) + 0x100, 16).substring(1));
+            returnVal += Integer.toString(( hashBytes[i] & 0xff) + 0x100, 16).substring(1);
+        }
+        return returnVal.toLowerCase();
+    }
 }
