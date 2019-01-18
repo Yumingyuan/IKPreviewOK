@@ -1,12 +1,12 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-53:12
-INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-53:12
-INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-53:12
-INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-53:12
-INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-53:12
-INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-53:12
-INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-53:12
+ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:2:1-52:12
 	package
 		ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:4:5-36
 		INJECTED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml
@@ -100,7 +100,7 @@ ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifes
 	android:name
 		ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:29:22-76
 application
-ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:30:5-51:19
+ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:30:5-50:19
 	android:label
 		ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:34:9-41
 	android:hardwareAccelerated
@@ -139,7 +139,3 @@ category#android.intent.category.LAUNCHER
 ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:47:17-77
 	android:name
 		ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:47:27-74
-service#buaa.irisking.scanner.MainActivity
-ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:50:9-69
-	android:name
-		ADDED from D:\2019.1\android\IKPreviewSampleDemoCPP1\app\src\main\AndroidManifest.xml:50:18-67

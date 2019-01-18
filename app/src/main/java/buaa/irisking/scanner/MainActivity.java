@@ -35,6 +35,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -110,7 +111,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 	private RadioGroup mRgEye;
 	private RoundProgressBar progressBar;
 	private EyeView mEyeView; // 显示提示框的view界面
-	//add by yumingyuan
+	//add by yumingyuan 20190117
 	private EditText mPinedit;
 	//add by yumingyuan
 	//===================================
@@ -153,7 +154,10 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
     public static final int HANDLER_RESET_PROGRESS = 0x0013;
     public static final int HANDLER_SHOW_LEFT = 0x0014;
     public static final int HANDLER_SHOW_RIGHT = 0x0015;
-    
+    //add by yumingyuan 20190118尝试屏蔽按键
+    public static final int FLAG_BackKEY_DISPATCHED = 0x80000000;
+    public static final int FLAG_DiialKY_DISPATCHED=0x80000001;
+    //add by yumingyuan 20190118尝试屏蔽按键
     private EnrFeatrueStruct leftECEyeFeat;
 	private EnrFeatrueStruct rightECEyeFeat;
 	
@@ -165,6 +169,10 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 全屏，不出现图标
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		//add by yumingyuan注册Flag
+        getWindow().setFlags(FLAG_BackKEY_DISPATCHED, FLAG_BackKEY_DISPATCHED);//关键代码
+		getWindow().setFlags(FLAG_DiialKY_DISPATCHED, FLAG_DiialKY_DISPATCHED);//关键代码
+        //add by yumingyuan注册Flag
 		getWindow().setFormat(PixelFormat.TRANSLUCENT);
 		screenUiAdjust();
 		
@@ -1199,7 +1207,21 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
             frameIndex = 0;
         }
     }
-	//add by yumingyuan 20190117将byte[]转换为16进制字符串
+    //add by yumingyuan 20190118重写onkeydown方法，捕捉keycode，返回false则屏蔽按键
+    public boolean onKeyDown( int keyCode, KeyEvent event) {
+	    //System.out.println(keyCode);
+        if (keyCode == 4) {
+            return false;
+        }
+        if(keyCode==5)
+		{
+			System.out.println(event.getKeyCode());
+			return false;
+		}
+        return super.onKeyDown(keyCode, event);
+    }
+    //add by yumingyuan 20190118重写onkeydown方法结束
+    //add by yumingyuan 20190117将byte[]转换为16进制字符串
     private static String convertHashToString(byte[] hashBytes) {
         String returnVal = "";
         for (int i = 0; i < hashBytes.length; i++) {
