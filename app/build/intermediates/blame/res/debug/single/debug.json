@@ -4,12 +4,12 @@
         "source": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\src\\main\\res\\raw\\idenpass.wav"
     },
     {
-        "merged": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\build\\intermediates\\res\\merged\\debug\\raw-zh-rCN_enrsucc.wav.flat",
-        "source": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\src\\main\\res\\raw-zh-rCN\\enrsucc.wav"
-    },
-    {
         "merged": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\build\\intermediates\\res\\merged\\debug\\raw_idensucc.mp3.flat",
         "source": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\src\\main\\res\\raw\\idensucc.mp3"
+    },
+    {
+        "merged": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\build\\intermediates\\res\\merged\\debug\\raw-zh-rCN_enrsucc.wav.flat",
+        "source": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\src\\main\\res\\raw-zh-rCN\\enrsucc.wav"
     },
     {
         "merged": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\build\\intermediates\\res\\merged\\debug\\raw_welcom.mp3.flat",
@@ -20,12 +20,12 @@
         "source": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\src\\main\\res\\raw\\moveleft.wav"
     },
     {
-        "merged": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\build\\intermediates\\res\\merged\\debug\\raw-en-rUS_moveright.wav.flat",
-        "source": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\src\\main\\res\\raw-en-rUS\\moveright.wav"
-    },
-    {
         "merged": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\build\\intermediates\\res\\merged\\debug\\raw-zh-rCN_moveright.wav.flat",
         "source": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\src\\main\\res\\raw-zh-rCN\\moveright.wav"
+    },
+    {
+        "merged": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\build\\intermediates\\res\\merged\\debug\\raw-en-rUS_moveright.wav.flat",
+        "source": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\src\\main\\res\\raw-en-rUS\\moveright.wav"
     },
     {
         "merged": "D:\\2019.1\\android\\IKPreviewSampleDemoCPP1\\app\\build\\intermediates\\res\\merged\\debug\\raw-zh-rCN_identimeout.wav.flat",
