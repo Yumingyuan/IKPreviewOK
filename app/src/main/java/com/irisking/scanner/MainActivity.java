@@ -550,7 +550,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
                 }
             }
 			break;
-			//add by yumingyuan
+			//add by yumingyuan end
 		}
 
 
@@ -1204,7 +1204,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
             frameIndex = 0;
         }
     }
-	//add by yumingyuan 20190117
+	//add by yumingyuan 20190117将byte[]转换为16进制字符串
     private static String convertHashToString(byte[] hashBytes) {
         String returnVal = "";
         for (int i = 0; i < hashBytes.length; i++) {
