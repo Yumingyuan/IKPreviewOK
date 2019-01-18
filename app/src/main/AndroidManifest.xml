@@ -19,6 +19,8 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>    <!--弹出系统级窗口-->
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>    <!--强制关闭进程权限-->
     <!--add by yumingyuan at 20190118 锁屏权限加入stop-->
+    <!--add by yumingyuan at 20190118 指纹权限加入start-->
+    <!--add by yumingyuan at 20190118 指纹权限加入stop-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -40,8 +42,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan"
             android:label="@string/app_name"
-            android:excludeFromRecents="true"
-            android:launchMode="singleTask"><!--excludeFromRecents和launchMode是新添加的，如果不对，请删除launchMode，以默认lauchmode运行-->
+            android:excludeFromRecents="true"><!--excludeFromRecents和launchMode是新添加的，如果不对，请删除launchMode，以默认lauchmode运行-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
