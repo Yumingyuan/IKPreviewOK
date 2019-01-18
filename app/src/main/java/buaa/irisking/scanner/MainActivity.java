@@ -1336,7 +1336,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
             }
         }
     };
-    //add by yumingyuan finger print完成
+    //add by yumingyuan finger print完成能够通过
 
 
 
