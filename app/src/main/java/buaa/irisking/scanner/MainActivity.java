@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import android.annotation.SuppressLint;
@@ -29,9 +30,11 @@ import android.graphics.PixelFormat;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -50,6 +53,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fp.FingerprintManager.Fingerprint;
+import com.fp.FingerprintManager.FingerprintManager;
 import com.irisking.irisalgo.bean.IKEnrIdenStatus;
 import com.irisking.irisalgo.util.AadharIrisISOFormat7;
 import com.irisking.irisalgo.util.Config;
@@ -115,7 +120,14 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 	private EditText mPinedit;
 	//add by yumingyuan
 	//===================================
-	
+	//add by yumingyuan fingerprint class
+	private FingerprintManager theFpmanager = null;
+	private Vibrator mVibrator = null;
+	CancellationSignal cancelAuthenticateSignal = null;
+	int fpVerifyWrongTimes = 0;//错误次数
+	final int FP_VERIFY_WRONG_MAX = 5;//最大验证次数
+	String message = "";
+	//add by yumingyuan fingerprint over
 	//=========画IR图像=========
 	private SurfaceHolder holder;
 	private Matrix matrix;
@@ -180,6 +192,9 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 		
 		initSound();
 		initUI();
+		//add by yumingyuan for finger print
+        initFingerprint();
+        //add by yumingyuan for finger print
 		mSurfaceHandler = new SurfaceHandler(MainActivity.this);
 		if(Config.DEVICE_USBCAMERA){
 			mIrisPresenter = new IrisPresenter(this, uvcPreviewCallback);
@@ -212,7 +227,12 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
         moveLeftId = soundPool.load(getApplicationContext(), R.raw.moveleft, 0);
         moveRightId = soundPool.load(getApplicationContext(), R.raw.moveright, 0);
 	}
-	
+	//add by yumingyuan for fingerprint 20190118用于初始化指纹控件
+	private void initFingerprint()
+	{
+		startFingerVerify();
+	}
+	//add by yumingyuan for fingerprint 20190118
 	private void initIrisData() {
 		// 2017.09.05 10:25修改，从数据库查询所有特征文件
 		ArrayList<IrisUserInfo> leftEyeList = (ArrayList<IrisUserInfo>) sqliteDataBase.queryLeftFeature();
@@ -1234,4 +1254,91 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
         }
         return returnVal.toLowerCase();
     }
+    //add by yumingyuan for fingerprint 20190118
+	private FingerprintManager getFpManager(){
+		if(theFpmanager == null){
+			theFpmanager = FingerprintManager.getFpManager(this);
+			System.out.println("Get finger print");
+		}
+		return theFpmanager;
+	}
+	//add by yumingyuan for fingerprint
+	private void startFingerVerify() {
+		getFpManager();
+
+		// 获取指纹数
+		List<Fingerprint> fpList = theFpmanager.getEnrolledFingerprints();
+		int iEnrollFingerCnt = (fpList != null) ? fpList.size() : 0;
+
+		// 当前指纹数>0 则配置并开启指纹认证
+		if(iEnrollFingerCnt > 0){
+			cancelAuthenticateSignal = new CancellationSignal();
+			theFpmanager.authenticate(null, cancelAuthenticateSignal, 0, mAuthCB, null);
+		}
+	}
+	private void fpAuthenticationFailed(){
+		fpVerifyWrongTimes++;
+		if(fpVerifyWrongTimes < FP_VERIFY_WRONG_MAX){
+			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(2,0, 0));
+		}else{
+			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(3,0, 0));
+		}
+	}
+	FingerprintManager.AuthenticationCallback mAuthCB = new  FingerprintManager.AuthenticationCallback(){
+
+		//认证出错
+		public void onAuthenticationError(int errorCode, CharSequence errString) {
+			if(errorCode != FingerprintManager.FINGERPRINT_ERROR_CANCELED){
+				fpAuthenticationFailed();
+			}
+		}
+
+		public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
+			fpAuthenticationFailed();
+		}
+		//认证成功, 通过result参数 识别当前认真成功的是那个指纹
+		public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
+			cancelAuthenticateSignal = null;
+			System.out.println("OKOK!");
+			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(1, 0, 0));
+		}
+		//认证失败
+		public void onAuthenticationFailed() {
+			fpAuthenticationFailed();
+		}
+
+		public void onAuthenticationAcquired(int acquireInfo) {
+
+		}
+	};
+    Handler mHandlerFp = new Handler() {
+        public void handleMessage(Message msg) {
+            switch(msg.what) {
+                case 1: //fp success
+                {
+                    fpVerifyWrongTimes = 0;
+                    System.out.println("verify OK!");
+                }
+                break;
+
+                case 2://fp retry
+                {
+                    System.out.println("Retry!");
+                }
+                break;
+
+                case 3: //fp failed
+                {
+                    System.out.println("Fail!");
+                }
+                default:
+                    break;
+            }
+        }
+    };
+    //add by yumingyuan finger print
+
+
+
+
 }
