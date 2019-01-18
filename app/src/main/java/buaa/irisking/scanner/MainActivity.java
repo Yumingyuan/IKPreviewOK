@@ -3,6 +3,7 @@ package buaa.irisking.scanner;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.security.MessageDigest;
@@ -116,6 +117,8 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 	private RadioGroup mRgEye;
 	private RoundProgressBar progressBar;
 	private EyeView mEyeView; // 显示提示框的view界面
+	//add by yumingyuan 20190118
+	private TextView mtext_authenTextView;
 	//add by yumingyuan 20190117
 	private EditText mPinedit;
 	//add by yumingyuan
@@ -172,7 +175,10 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
     //add by yumingyuan 20190118尝试屏蔽按键
     private EnrFeatrueStruct leftECEyeFeat;
 	private EnrFeatrueStruct rightECEyeFeat;
-	
+	//add by yumingyuan String passhash
+	private String passhash;
+	private int Authentication_level;
+	//add by yumingyuan
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -399,7 +405,62 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
         }
     };
 	protected int distRange = 0;
-
+	//add by yumingyuan用于初始化配置文件
+	private void initFile()
+	{
+		String properties_file_path = "/data/data/userconfig.properties";//Authconfig.properties
+		String properties_auth_file_path="/data/data/Authconfig.properties";
+		File fileconfig = new File(properties_file_path);
+		File authconfig = new File(properties_auth_file_path);
+		FileInputStream fin1= null;
+		FileInputStream fin2= null;
+		try {
+			fin1 = new FileInputStream(fileconfig);
+			fin2 = new FileInputStream(authconfig);
+			//byte [] buffer1 = new byte[300];
+			InputStreamReader inputreader1 = new InputStreamReader(fin1);
+			InputStreamReader inputreader2 = new InputStreamReader(fin2);
+			BufferedReader buffreader1 = new BufferedReader(inputreader1);
+			BufferedReader buffreader2 = new BufferedReader(inputreader2);
+			String line1;
+			String line2;
+			//分行读取
+			while (( line1 = buffreader1.readLine()) != null) {
+				if(line1.contains("userpass"))//读passhash
+				{
+					passhash=line1.substring(line1.indexOf("=")+2);
+					System.out.println("passhash:"+passhash);
+				}
+			}
+			while((line2=buffreader2.readLine())!=null)
+			{
+				if(line2.contains("authentication_level"))
+				{
+					Authentication_level=Integer.parseInt(line2.substring(line2.indexOf("=")+2));
+					if(Authentication_level==4)
+					{
+						mtext_authenTextView.setText("只使用PID进行认证");
+					}
+					else if(Authentication_level==5)
+					{
+						mtext_authenTextView.setText("使用虹膜和PID进行认证");
+					}
+					else if(Authentication_level==6)
+					{
+						mtext_authenTextView.setText("使用指纹和PID进行认证");
+					}
+					else if(Authentication_level==7)
+					{
+						mtext_authenTextView.setText("使用虹膜、指纹和PID进行认证");
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//FileInputStream fin = openFileInput(properties_file_path);
+	}
+	//add by yumingyuan用于初始化配置文件
 	// Init view
 	private void initUI() {
 		svCamera = (SurfaceView) findViewById(R.id.iv_camera);
@@ -432,7 +493,9 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 		mPinIdenBtn.setOnClickListener(this);
 		mPinedit= (EditText) findViewById(R.id.et_pinpass);
 		//add by yumingyuan
-
+		//add by yumingyuan 加入认证方式读取并显示需要认证情况20190118
+		mtext_authenTextView= (TextView) findViewById(R.id.text_authen);
+		//add by yumingyuan 加入认证方式读取并显示需要认证情况的textview显示情况20190118
 		mResultTextViewEnrRecFinal = (TextView) findViewById(R.id.ie_final_result);
 		mUserNameEditText = (EditText) findViewById(R.id.et_userName);
 		leftView = (ImageView) findViewById(R.id.iv_left);
@@ -545,21 +608,6 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
                 try {
                     MessageDigest digest = MessageDigest.getInstance("SHA-1");
                     byte[] result=digest.digest(S_pin.getBytes());
-                    String properties_file_path = "/data/data/userconfig.properties";
-					File file = new File(properties_file_path);
-					FileInputStream fin= new FileInputStream(file);
-					//FileInputStream fin = openFileInput(properties_file_path);
-					byte [] buffer = new byte[300];
-					InputStreamReader inputreader = new InputStreamReader(fin);
-					BufferedReader buffreader = new BufferedReader(inputreader);
-					String line;
-					//分行读取
-					while (( line = buffreader.readLine()) != null) {
-						if(line.contains("userpass"))
-						{
-							passhash=line.substring(line.indexOf("=")+2);
-						}
-					}
                    if(convertHashToString(result).equals(passhash.trim()))
 					{
 						System.exit(0);
@@ -1258,14 +1306,12 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 	private FingerprintManager getFpManager(){
 		if(theFpmanager == null){
 			theFpmanager = FingerprintManager.getFpManager(this);
-			System.out.println("Get finger print");
 		}
 		return theFpmanager;
 	}
 	//add by yumingyuan for fingerprint
 	private void startFingerVerify() {
 		getFpManager();
-
 		// 获取指纹数
 		List<Fingerprint> fpList = theFpmanager.getEnrolledFingerprints();
 		int iEnrollFingerCnt = (fpList != null) ? fpList.size() : 0;

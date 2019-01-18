@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg1" >
@@ -46,14 +47,17 @@
         android:id="@+id/ll_config"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical" >
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="141dp"
+        android:orientation="vertical">
 
         <RadioGroup
             android:id="@+id/rg_eyeGroup"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="61dp"
+            android:layout_alignStart="@+id/ll_config"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
@@ -87,25 +91,6 @@
                 android:text="undef" />
         </RadioGroup>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/iv_left"
-                android:layout_width="160dp"
-                android:layout_height="120dp" />
-
-            <ImageView
-                android:id="@+id/iv_right"
-                android:layout_marginLeft="50dp"
-                android:layout_width="160dp"
-                android:layout_height="120dp" />
-        </LinearLayout>
-
         <EditText
             android:id="@+id/et_userName"
             android:layout_width="120dp"
@@ -113,6 +98,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:gravity="center"
+            android:visibility="gone"
             android:maxLength="18"
             android:singleLine="true"
             android:text="default" />
@@ -135,41 +121,53 @@
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/button_white_round"
                 android:text="@string/start_register"
-                android:textColor="@color/ik_dark_black" />
-                <!--android:drawableLeft="@drawable/iconfont_my_33_width"-->
+                android:textColor="@color/ik_dark_black"
+                android:visibility="gone"/>
+            <!--android:drawableLeft="@drawable/iconfont_my_33_width"-->
             <!--不显示Button-->
             <Button
                 android:id="@+id/btn_capture"
-                android:visibility="gone"
                 android:layout_width="200px"
                 android:layout_height="70px"
                 android:layout_marginBottom="200px"
                 android:background="@drawable/button_white_round"
                 android:drawableLeft="@drawable/iconfont_my_33_width"
                 android:text="@string/start_capture"
-                android:textColor="@color/ik_dark_black" />
+                android:textColor="@color/ik_dark_black"
+                android:visibility="gone" />
             <!--不显示Button-->
             <Button
                 android:id="@+id/btn_scan"
                 android:layout_width="240px"
                 android:layout_height="70px"
-                android:layout_toRightOf="@id/btn_register"
                 android:layout_marginBottom="30dp"
+                android:layout_toRightOf="@id/btn_register"
                 android:background="@drawable/button_white_round"
                 android:text="@string/start_identify"
+                android:textColor="@color/ik_dark_black"
+                android:visibility="gone"/>
+            <!--android:drawableLeft="@drawable/iconfont_roundcheck_33_width"-->
+            <Button
+                android:id="@+id/btn_pin"
+                android:layout_width="240px"
+                android:layout_height="70px"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="30dp"
+                android:layout_toRightOf="@id/btn_scan"
+                android:background="@drawable/button_white_round"
+                android:text="@string/start_pinidentify"
                 android:textColor="@color/ik_dark_black" />
-        <!--android:drawableLeft="@drawable/iconfont_roundcheck_33_width"-->
-    <Button
-        android:id="@+id/btn_pin"
-        android:layout_width="240px"
-        android:layout_height="70px"
-        android:layout_toRightOf="@id/btn_scan"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/button_white_round"
-        android:text="@string/start_pinidentify"
-        android:textColor="@color/ik_dark_black" />
-</RelativeLayout>
-<!--<Button
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/text_authen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""/>
+        </LinearLayout>
+        <!--<Button
     android:id="@+id/btn_register"
     android:layout_width="300px"
     android:layout_height="70px"

@@ -108,6 +108,7 @@ public final class R {
     public static final int rb_undef=0x7f050012;
     public static final int rg_eyeGroup=0x7f050013;
     public static final int roundProgress=0x7f050014;
+    public static final int text_authen=0x7f050015;
   }
   public static final class layout {
     public static final int activity_iris_recognition=0x7f060000;
