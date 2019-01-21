@@ -42,7 +42,11 @@
             android:textColor="#FF0000"
             android:textSize="18sp" />
     </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/ll_config"
         android:layout_width="match_parent"
@@ -52,7 +56,12 @@
         android:layout_marginStart="0dp"
         android:layout_marginBottom="141dp"
         android:orientation="vertical">
-
+        <TextView
+            android:id="@+id/text_authen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center_horizontal"/>
         <RadioGroup
             android:id="@+id/rg_eyeGroup"
             android:layout_width="wrap_content"
@@ -158,15 +167,7 @@
                 android:text="@string/start_pinidentify"
                 android:textColor="@color/ik_dark_black" />
         </RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/text_authen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""/>
-        </LinearLayout>
+
         <!--<Button
     android:id="@+id/btn_register"
     android:layout_width="300px"
