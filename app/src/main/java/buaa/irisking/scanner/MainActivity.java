@@ -178,6 +178,8 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 	//add by yumingyuan String passhash
 	private String passhash;
 	private int Authentication_level;
+	private boolean fp_status;
+	private boolean pin_status;
 	//add by yumingyuan
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -198,6 +200,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 		
 		initSound();
 		initUI();
+		initFile();
 		//add by yumingyuan for finger print
         initFingerprint();
         //add by yumingyuan for finger print
@@ -408,6 +411,8 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 	//add by yumingyuan用于初始化配置文件
 	private void initFile()
 	{
+		System.out.println("initFile");
+		mtext_authenTextView= (TextView) findViewById(R.id.text_authen);
 		String properties_file_path = "/data/data/userconfig.properties";//Authconfig.properties
 		String properties_auth_file_path="/data/data/Authconfig.properties";
 		File fileconfig = new File(properties_file_path);
@@ -436,8 +441,14 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 			{
 				if(line2.contains("authentication_level"))
 				{
-					Authentication_level=Integer.parseInt(line2.substring(line2.indexOf("=")+2));
-					if(Authentication_level==4)
+					//System.out.println(line2);
+					Authentication_level=Integer.parseInt(line2.substring(line2.indexOf("=")+1));
+					System.out.println(Authentication_level);
+					if(Authentication_level==2)
+					{
+						mtext_authenTextView.setText("只使用指纹进行认证");
+					}
+					else if(Authentication_level==4)
 					{
 						mtext_authenTextView.setText("只使用PID进行认证");
 					}
@@ -500,7 +511,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 		mUserNameEditText = (EditText) findViewById(R.id.et_userName);
 		leftView = (ImageView) findViewById(R.id.iv_left);
 		rightView = (ImageView) findViewById(R.id.iv_right);
-		
+
 		previewParaUpdated = false;
 		
 		if(Config.DEVICE_SINGLE_EYE){
@@ -604,17 +615,32 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 			else//输入PIN码，进行合法性检查
 			{
 			    String S_pin=mPinedit.getText().toString();
-				String passhash = null;
                 try {
                     MessageDigest digest = MessageDigest.getInstance("SHA-1");
                     byte[] result=digest.digest(S_pin.getBytes());
-                   if(convertHashToString(result).equals(passhash.trim()))
+                   if(convertHashToString(result).equals(passhash.trim())&&!fp_status&&this.Authentication_level==2)
 					{
 						System.exit(0);
 					}
-					else
+					else if(convertHashToString(result).equals(passhash.trim())&&this.Authentication_level==4)
+				   {
+					   System.exit(0);
+				   }
+				   else if(convertHashToString(result).equals(passhash.trim())&&this.Authentication_level==6&&fp_status)
+				   {
+				   		System.exit(0);
+				   }
+					else if(!convertHashToString(result).equals(passhash.trim()))
 					{
 						Toast.makeText(this,"PIN码错误",Toast.LENGTH_LONG).show();
+					}
+					else if(this.Authentication_level==6&&!fp_status&&(convertHashToString(result).equals(passhash.trim())||!convertHashToString(result).equals(passhash.trim())))
+				   {
+					   Toast.makeText(this,"指纹尚未验证通过",Toast.LENGTH_LONG).show();
+				   }
+				   else if(this.Authentication_level==7&&!fp_status&&(convertHashToString(result).equals(passhash.trim())||!convertHashToString(result).equals(passhash.trim())))
+					{
+						Toast.makeText(this,"指纹尚未验证通过",Toast.LENGTH_LONG).show();
 					}
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1327,6 +1353,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 		if(fpVerifyWrongTimes < FP_VERIFY_WRONG_MAX){
 			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(2,0, 0));
 		}else{
+			//已经完全失败了
 			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(3,0, 0));
 		}
 	}
@@ -1362,20 +1389,47 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
             switch(msg.what) {
                 case 1: //fp success
                 {
+					//Toast.makeText(MainActivity.this,"指纹验证成功", Toast.LENGTH_SHORT).show();
                     fpVerifyWrongTimes = 0;
                     System.out.println("verify OK!");
+                    if(Authentication_level==2)//单独指纹的情况直接退出
+					{
+						System.exit(0);
+					}else if(Authentication_level==6)
+					{
+						fp_status=true;
+						Toast.makeText(MainActivity.this,"指纹验证成功，请输入PIN码", Toast.LENGTH_SHORT).show();
+					}else if(Authentication_level==7)
+					{
+						fp_status=true;
+						Toast.makeText(MainActivity.this,"指纹验证成功，请输入PIN码并进行虹膜认证", Toast.LENGTH_SHORT).show();
+					}
                 }
                 break;
 
                 case 2://fp retry
                 {
-                    System.out.println("Retry!");
+					Toast.makeText(MainActivity.this,"请重新录入指纹", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
                 case 3: //fp failed
                 {
+					fp_status=false;
                     System.out.println("Fail!");
+                    if(Authentication_level==2)
+					{
+						Toast.makeText(MainActivity.this,"指纹认证失效，请使用PIN码认证", Toast.LENGTH_SHORT).show();
+					}
+					else if(Authentication_level==6)
+					{
+						Toast.makeText(MainActivity.this,"指纹认证失效，无法解锁，请联系管理员", Toast.LENGTH_SHORT).show();
+					}
+					else if(Authentication_level==7)
+					{
+						Toast.makeText(MainActivity.this,"指纹认证失效，无法解锁，请联系管理员", Toast.LENGTH_SHORT).show();
+					}
+                    fp_status=false;
                 }
                 default:
                     break;
