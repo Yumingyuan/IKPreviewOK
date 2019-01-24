@@ -200,7 +200,9 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 		
 		initSound();
 		initUI();
+		//add by yumingyuan for read setting
 		initFile();
+		//add by yumingyuan for read setting
 		//add by yumingyuan for finger print
         initFingerprint();
         //add by yumingyuan for finger print
@@ -618,8 +620,12 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
                 try {
                     MessageDigest digest = MessageDigest.getInstance("SHA-1");
                     byte[] result=digest.digest(S_pin.getBytes());
-                   if(convertHashToString(result).equals(passhash.trim())&&!fp_status&&this.Authentication_level==2)
-					{
+                    if(this.Authentication_level==2&&(fpVerifyWrongTimes<FP_VERIFY_WRONG_MAX))
+					{//
+						Toast.makeText(this,"必须指纹验证失败，才能尝试PIN码解锁",Toast.LENGTH_LONG).show();
+					}
+                   else if(convertHashToString(result).equals(passhash.trim())&&(fpVerifyWrongTimes==FP_VERIFY_WRONG_MAX)&&this.Authentication_level==2)
+					{//指纹验证已经失败，允许只要输入的PIN码一致，就可以解锁
 						System.exit(0);
 					}
 					else if(convertHashToString(result).equals(passhash.trim())&&this.Authentication_level==4)
@@ -1304,7 +1310,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
     //add by yumingyuan 20190118重写onkeydown方法，捕捉keycode，返回false则屏蔽按键
     public boolean onKeyDown( int keyCode, KeyEvent event) {
 	    //System.out.println(keyCode);
-        if (keyCode == 4) {
+        if (keyCode == 4) {//屏蔽返回键
             return false;
         }
         if(keyCode==5)
@@ -1349,9 +1355,9 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 		}
 	}
 	private void fpAuthenticationFailed(){
-		fpVerifyWrongTimes++;
+		fpVerifyWrongTimes++;//错误次数
 		if(fpVerifyWrongTimes < FP_VERIFY_WRONG_MAX){
-			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(2,0, 0));
+			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(2,0, 0));//还能够重试
 		}else{
 			//已经完全失败了
 			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(3,0, 0));
