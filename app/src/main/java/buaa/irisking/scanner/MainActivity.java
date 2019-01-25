@@ -105,7 +105,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 	private Button mIrisCaptureBtn;
 	private Button mIrisIdenBtn;
 	//add by yumingyuan
-	private Button mPinIdenBtn;
+	private Button mPinIdenBtn;//进行PID认证的按钮
 	//add by yumingyuan
 	private TextView mResultTextViewEnrRecFinal;
 	private EditText mUserNameEditText; // 显示用户名
@@ -1307,19 +1307,19 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
             frameIndex = 0;
         }
     }
-    //add by yumingyuan 20190118重写onkeydown方法，捕捉keycode，返回false则屏蔽按键
+    //add by yumingyuan 20190118重写onkeydown方法，捕捉keycode，返回false则屏蔽了对应的按键
     public boolean onKeyDown( int keyCode, KeyEvent event) {
-	    //System.out.println(keyCode);
-        if (keyCode == 4) {//屏蔽返回键
-            return false;
-        }
-        if(keyCode==5)
+		//System.out.println(keyCode);
+		if (keyCode == 4) {//屏蔽返回键
+			return false;
+		}
+		if(keyCode==5)
 		{
 			System.out.println(event.getKeyCode());
 			return false;
 		}
-        return super.onKeyDown(keyCode, event);
-    }
+		return super.onKeyDown(keyCode, event);
+	}
     //add by yumingyuan 20190118重写onkeydown方法结束
     //add by yumingyuan 20190117将byte[]转换为16进制字符串
     private static String convertHashToString(byte[] hashBytes) {
@@ -1390,6 +1390,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 
 		}
 	};
+	//主线程处理函数
     Handler mHandlerFp = new Handler() {
         public void handleMessage(Message msg) {
             switch(msg.what) {
