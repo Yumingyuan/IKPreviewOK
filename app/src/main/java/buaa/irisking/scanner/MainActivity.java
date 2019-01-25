@@ -241,7 +241,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 	//add by yumingyuan for fingerprint 20190118用于初始化指纹控件
 	private void initFingerprint()
 	{
-		startFingerVerify();
+		startFingerVerify();//启动指纹认证
 	}
 	//add by yumingyuan for fingerprint 20190118
 	private void initIrisData() {
@@ -608,7 +608,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 				mIrisPresenter.startIdentify(mIdentifyConfig, processCallback);
 			}
 			break;
-		//add by yumingyuan认证用
+		//add by yumingyuan PIN认证用
 		case R.id.btn_pin:
 			if(mPinedit.getText().length()==0)//edittext中未输入pin码的处理情况
 			{
@@ -1337,30 +1337,30 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
     //add by yumingyuan for fingerprint 20190118
 	private FingerprintManager getFpManager(){
 		if(theFpmanager == null){
-			theFpmanager = FingerprintManager.getFpManager(this);
+			theFpmanager = FingerprintManager.getFpManager(this);//获得指纹管理器服务对象
 		}
 		return theFpmanager;
 	}
 	//add by yumingyuan for fingerprint
-	private void startFingerVerify() {
+	private void startFingerVerify() {//启动指纹认证服务
 		getFpManager();
 		// 获取指纹数
 		List<Fingerprint> fpList = theFpmanager.getEnrolledFingerprints();
-		int iEnrollFingerCnt = (fpList != null) ? fpList.size() : 0;
+		int iEnrollFingerCnt = (fpList != null) ? fpList.size() : 0;//双目运算符，获得指纹数信息
 
 		// 当前指纹数>0 则配置并开启指纹认证
 		if(iEnrollFingerCnt > 0){
 			cancelAuthenticateSignal = new CancellationSignal();
-			theFpmanager.authenticate(null, cancelAuthenticateSignal, 0, mAuthCB, null);
+			theFpmanager.authenticate(null, cancelAuthenticateSignal, 0, mAuthCB, null);//启动指纹识别，指定回调函数mAuthCB
 		}
 	}
 	private void fpAuthenticationFailed(){
 		fpVerifyWrongTimes++;//错误次数
 		if(fpVerifyWrongTimes < FP_VERIFY_WRONG_MAX){
-			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(2,0, 0));//还能够重试
+			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(2,0, 0));//发送重试消息
 		}else{
 			//已经完全失败了
-			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(3,0, 0));
+			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(3,0, 0));//发送失败消息
 		}
 	}
 	FingerprintManager.AuthenticationCallback mAuthCB = new  FingerprintManager.AuthenticationCallback(){
@@ -1368,18 +1368,18 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 		//认证出错
 		public void onAuthenticationError(int errorCode, CharSequence errString) {
 			if(errorCode != FingerprintManager.FINGERPRINT_ERROR_CANCELED){
-				fpAuthenticationFailed();
+				fpAuthenticationFailed();//调用认证失败函数
 			}
 		}
 
 		public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
-			fpAuthenticationFailed();
+			fpAuthenticationFailed();//调用认证失败处理函数
 		}
-		//认证成功, 通过result参数 识别当前认真成功的是那个指纹
+		//认证成功, 通过result参数 识别当前成功认证的是那个指纹
 		public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
 			cancelAuthenticateSignal = null;
 			System.out.println("OKOK!");
-			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(1, 0, 0));
+			mHandlerFp.sendMessage(mHandlerFp.obtainMessage(1, 0, 0));//向主线程（真正的程序）发信号
 		}
 		//认证失败
 		public void onAuthenticationFailed() {
@@ -1390,7 +1390,7 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 
 		}
 	};
-	//主线程处理函数
+	//主线程处理函数，mHandlerFp接收指纹验证线程发送的信号
     Handler mHandlerFp = new Handler() {
         public void handleMessage(Message msg) {
             switch(msg.what) {
@@ -1399,14 +1399,14 @@ public class MainActivity extends Activity implements OnClickListener, RadioGrou
 					//Toast.makeText(MainActivity.this,"指纹验证成功", Toast.LENGTH_SHORT).show();
                     fpVerifyWrongTimes = 0;
                     System.out.println("verify OK!");
-                    if(Authentication_level==2)//单独指纹的情况直接退出
+                    if(Authentication_level==2)//单独指纹的情况直接解锁
 					{
 						System.exit(0);
-					}else if(Authentication_level==6)
+					}else if(Authentication_level==6)//指纹和PIN码的情况，暂不解锁，等待pin码输入
 					{
 						fp_status=true;
 						Toast.makeText(MainActivity.this,"指纹验证成功，请输入PIN码", Toast.LENGTH_SHORT).show();
-					}else if(Authentication_level==7)
+					}else if(Authentication_level==7)//指纹虹膜，PIN的情况
 					{
 						fp_status=true;
 						Toast.makeText(MainActivity.this,"指纹验证成功，请输入PIN码并进行虹膜认证", Toast.LENGTH_SHORT).show();
